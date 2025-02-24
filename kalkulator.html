@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kalkulator</title>
+  <style>
+    body{
+      font-family: Arial, sans-serif ;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: blue;
+    }
+    .kalkulator{
+      background: lightgrey;
+      padding:20px ;
+      border-radius:10px ;
+      width: 300px;
+      box-shadow: 0 4px 10px black;
+    }
+    .input{
+      width:100% ;
+      height:50px ;
+      border: none;
+      background-color:;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      color:black ;
+      padding:10px ;
+      box-sizing:border-box;
+      font-size: 18px ;
+      text-align: right;
+      box-shadow: 0 4px 10px black;
+
+    }
+    .tombol{
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    .tombol button{
+      padding: 15px;
+      font-size: 15px;
+      border-radius: 5px;
+      border:none ;
+      background-color:blue ;
+      cursor:pointer;
+      color: white;
+      transition: baground 0,4s;
+      box-shadow: 0 4px 10px black;
+    }
+    .tombol button:hover{  
+      background-color:aqua;
+    }
+    .tombol .operator{
+      background-color: yellow;
+      width: 80px;
+      font-weight: bold;
+      color: black;
+    }
+    .tombol .operator:hover{
+      background-color: orange;
+    }
+    .tombol .persen{
+      background-color: yellow;
+      font-weight: bold;
+      color: black; 
+    }
+    .tombol .persen:hover{
+      background-color: orange;
+    }  
+    .tombol .hapus{
+      background-color: red;
+      
+      
+    } 
+    .tombol .hapus:hover{
+      background-color: darkred;
+    }
+    .tombol .hasil{
+      background-color: yellow;
+      grid-column: span 2;
+      font-weight: bold;
+      color: black;
+    }
+    .tombol .hasil:hover{
+      background-color:orange;
+    } 
+    .tombol .backspace {
+      background-color: purple;
+    
+      
+    }
+    .tombol .backspace:hover {
+      background-color: darkviolet;
+    }
+  footer {
+    position: absolute;
+    margin-top: 90px;
+    text-align: center;
+    bottom:15px;
+    font-size: 14px;
+    color: grey;
+  }
+   </style>
+</head>
+<body>
+ <div class="kalkulator">
+   <input
+   type="text"
+   class="input"
+   id="display"
+   placeholder="Silahkan isi"
+   disabled
+   />
+   <div class="tombol">
+   	<button class="hapus" onclick="clearDisplay('')">C</button>
+   	<button class="backspace" onclick="backspace()">⌫</button>
+    <button class="persen" onclick="persen('%')">%</button>
+     <button class="operator" onclick="operator('/')">÷</button>
+    <button onclick="angka('7')">7</button>
+    <button onclick="angka('8')">8</button>
+    <button onclick="angka('9')">9</button>
+   
+    <button class="operator" onclick="operator('-')">-</button>
+    <button onclick="angka('4')">4</button>
+    <button onclick="angka('5')">5</button>
+    <button onclick="angka('6')">6</button>
+    
+    <button class="operator" onclick="operator('*')">X</button>
+    <button onclick="angka('1')">1</button>
+    <button onclick="angka('2')">2</button>
+    <button onclick="angka('3')">3</button>   
+    <button class="operator" onclick="operator('+')">+</button>
+    <button onclick="angka('0')">0</button>
+    <button onclick="angka('.')">.</button>
+    <button class="hasil" onclick="hasil('=')">=</button>
+   </div>
+ </div>
+ <footer>&copy; RIQI J.A | XII RPL 1</footer>
+ <script>
+   const display = document.getElementById("display");
+   function angka(number){
+    display.value += number;
+   }
+   function  operator(operator){
+   display.value += operator;
+ }
+ function clearDisplay(){
+  display.value = "";
+ }
+ function backspace() {
+    display.value = display.value.slice(0, -1);
+  }
+  function persen() {
+   try {
+    if (display.value) {
+     display.value = parseFloat(display.value) / 100;
+          }
+        } catch (error) {
+          display.value = "error";
+        }
+      }
+ function hasil(){
+  try{
+    if (display.value.includes('/0')) {
+      throw new Error("error bosss,tidak bisa di bagi 0");
+    }
+    display.value = eval(display.value);
+  } catch (error){
+    display.value =error.message;
+  }
+ }
+ </script>
+</body>
+</html>
